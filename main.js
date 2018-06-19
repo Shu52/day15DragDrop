@@ -24,14 +24,30 @@ const DragDropManager = Object.create(null, {
             // Determine what's being dropped
             const data = e.dataTransfer.getData("text")
             console.log(data)
+            console.log("target",target)
   
             // Append card to target component as child
             
             // TODO: This should only happen if the target has no children nodes
+            if(target.childNodes.length === 0){
+              e.preventDefault();
+              e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+            }
+            else if(target === document.querySelector("article")){
+              e.preventDefault();
+              e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+              console.log("back to orgin")
+            }
+            else{
+              console.log("denied")
+            }
+              
+              
+            
             // TODO: This should not happen if the target is another stage card
-            e.target.appendChild(document.querySelector(`.${data.split(" ")[1]}`))
+            }
           }
-        })
+        )
       }
     }
   })
